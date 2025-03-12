@@ -1,7 +1,12 @@
 import { supabase } from '@/lib/supabase';
 import { PresentationChartBarIcon } from '@heroicons/react/24/outline';
 
-async function getWorkshops() {
+interface Workshop {
+  week: number;
+  links: string[];
+}
+
+async function getWorkshops(): Promise<Workshop[]> {
   const { data, error } = await supabase
     .from('club_content')
     .select('content')
@@ -31,7 +36,7 @@ export default async function WorkshopsPage() {
       </div>
 
       <div className="mt-16 grid gap-8">
-        {workshops.map((workshop: any, index: number) => (
+        {workshops.map((workshop: Workshop, index: number) => (
           <div
             key={index}
             className="overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-gray-900/5 dark:bg-gray-900 dark:ring-gray-800"

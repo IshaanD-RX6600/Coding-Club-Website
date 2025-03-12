@@ -1,5 +1,10 @@
 import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
+import { PostgrestError } from '@supabase/supabase-js';
+
+interface ApiError extends Error {
+  details?: unknown;
+}
 
 export async function GET() {
   try {
@@ -32,13 +37,14 @@ export async function GET() {
       message: 'Supabase connection and data insertion successful',
       data
     });
-  } catch (err: any) {
-    console.error('API Error:', err);
+  } catch (err) {
+    const error = err as ApiError | PostgrestError;
+    console.error('API Error:', error);
     return NextResponse.json(
       { 
         status: 'error', 
-        message: err?.message || 'An unexpected error occurred',
-        details: err?.details || null
+        message: error?.message || 'An unexpected error occurred',
+        details: 'details' in error ? error.details : null
       },
       { status: 500 }
     );

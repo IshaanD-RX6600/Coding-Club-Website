@@ -1,7 +1,12 @@
 import { supabase } from '@/lib/supabase';
 import { CodeBracketIcon, TrophyIcon } from '@heroicons/react/24/outline';
 
-async function getChallenges() {
+interface Challenge {
+  week: number;
+  problems: string[];
+}
+
+async function getChallenges(): Promise<Challenge[]> {
   const { data, error } = await supabase
     .from('club_content')
     .select('content')
@@ -43,7 +48,7 @@ export default async function ChallengesPage() {
             DMOJ Problems
           </h2>
           <div className="mt-6 space-y-4">
-            {challenges.map((challenge: any, index: number) => (
+            {challenges.map((challenge: Challenge, index: number) => (
               <div
                 key={index}
                 className="overflow-hidden rounded-lg bg-white p-6 shadow-lg ring-1 ring-gray-900/5 dark:bg-gray-900 dark:ring-gray-800"
@@ -85,12 +90,12 @@ export default async function ChallengesPage() {
                   <TrophyIcon className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                 </div>
                 <h3 className="ml-4 text-lg font-semibold text-gray-900 dark:text-white">
-                  Iterated Prisoner's Dilemma
+                  Iterated Prisoner&apos;s Dilemma
                 </h3>
               </div>
               <p className="mt-4 text-gray-600 dark:text-gray-400">
-                Implement a strategy for the Iterated Prisoner's Dilemma game. Your goal is to maximize your score
-                through cooperation or defection against other players' strategies.
+                Implement a strategy for the Iterated Prisoner&apos;s Dilemma game. Your goal is to maximize your score
+                through cooperation or defection against other players&apos; strategies.
               </p>
               <div className="mt-4">
                 <h4 className="font-medium text-gray-900 dark:text-white">Sample Code:</h4>
