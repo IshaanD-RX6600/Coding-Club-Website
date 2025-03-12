@@ -1,4 +1,3 @@
-import React from 'react';
 import { clubData } from './data/clubData';
 
 export default function Home() {
