@@ -38,10 +38,10 @@ export default function Home() {
                   Join the Club
                 </Link>
                 <a 
-                  href="#gallery" 
+                  href="/projects" 
                   className="animate-fadeInUp rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 transition-transform hover:bg-gray-50 hover:scale-105 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700 [animation-delay:600ms]"
                 >
-                  View Projects
+                  Featured Projects
                 </a>
               </div>
             </div>
@@ -126,7 +126,7 @@ export default function Home() {
       </div>
 
       {/* Projects Gallery */}
-      <div id="gallery" className="bg-gray-50 py-16 dark:bg-gray-900">
+      {/* <div id="gallery" className="bg-gray-50 py-16 dark:bg-gray-900">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="animate-fadeInUp text-center text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
             Project Gallery
@@ -162,7 +162,7 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
