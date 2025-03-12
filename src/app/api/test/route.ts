@@ -6,6 +6,7 @@ interface ApiError extends Error {
   details?: unknown;
 }
 
+
 export async function GET() {
   try {
     // Test database connection
