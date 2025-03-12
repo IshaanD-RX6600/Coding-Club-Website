@@ -18,8 +18,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} bg-white text-gray-900 antialiased dark:bg-gray-950 dark:text-gray-50`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <body className={`${inter.className} antialiased`}>
+        <ThemeProvider>
           <Navigation />
           <main className="min-h-screen">{children}</main>
         </ThemeProvider>
