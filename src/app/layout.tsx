@@ -7,8 +7,8 @@ import { Navigation } from "@/components/Navigation";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Programming Club",
-  description: "Welcome to the Programming Club website",
+  title: "CHCI CodingClub",
+  description: "Welcome to the CHCI Coding Club website",
 };
 
 export default function RootLayout({
