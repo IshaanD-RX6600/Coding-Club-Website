@@ -1,5 +1,7 @@
 import { UserIcon, PhotoIcon, CodeBracketIcon } from '@heroicons/react/24/outline';
 import { Placeholder } from '@/components/Placeholder';
+import { GalleryGrid } from '@/components/GalleryGrid';
+import { galleryImages } from '@/data/gallery';
 import Link from 'next/link';
 
 const executives = [
@@ -125,44 +127,32 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Projects Gallery */}
-      {/* <div id="gallery" className="bg-gray-50 py-16 dark:bg-gray-900">
+      {/* Gallery Section */}
+      <div className="bg-gray-50 py-16 dark:bg-gray-900">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="animate-fadeInUp text-center text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Project Gallery
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-center text-gray-600 dark:text-gray-400">
-            Check out some of the amazing projects created by our club members.
-          </p>
-          <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {projects.map((project, index) => (
-              <div 
-                key={project.title}
-                className={`animate-fadeInUp group relative overflow-hidden rounded-lg bg-white shadow-md transition-all hover:shadow-xl dark:bg-gray-800 [animation-delay:${200 + index * 100}ms]`}
+          <div className="text-center">
+            <h2 className="animate-fadeInUp text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+              Club Memories
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-center text-gray-600 dark:text-gray-400">
+              Highlights from our workshops, events, and club activities.
+            </p>
+          </div>
+          
+          <div className="mt-10">
+            <GalleryGrid images={galleryImages.slice(0, 6)} columns={3} />
+            
+            <div className="mt-8 text-center">
+              <Link 
+                href="/gallery" 
+                className="inline-flex items-center justify-center rounded-lg border border-transparent bg-blue-600 px-5 py-3 text-base font-medium text-white shadow-sm hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
               >
-                <div className="aspect-w-16 aspect-h-9 relative h-48 w-full overflow-hidden">
-                  <Placeholder text={project.title} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-70"></div>
-                </div>
-                <div className="p-4">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                    {project.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                    {project.description}
-                  </p>
-                </div>
-                <div className="absolute inset-0 flex items-center justify-center bg-blue-600/90 opacity-0 transition-opacity group-hover:opacity-100">
-                  <div className="text-center text-white">
-                    <CodeBracketIcon className="mx-auto h-10 w-10" />
-                    <p className="mt-2 font-semibold">View Project</p>
-                  </div>
-                </div>
-              </div>
-            ))}
+                View Full Gallery
+              </Link>
+            </div>
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 }

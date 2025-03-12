@@ -228,60 +228,6 @@ bool makeMove(vector<bool>& myHistory, vector<bool>& opponentHistory) {
               </div>
             </div>
           </div>
-          
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border border-gray-200 dark:border-gray-700">
-            <div className="flex items-start gap-4">
-              <div className="bg-red-100 dark:bg-red-900 p-3 rounded-lg">
-                <TrophyIcon className="h-6 w-6 text-red-600 dark:text-red-400" />
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  Canadian Computing Olympiad (CCO)
-                </h3>
-                <p className="text-sm text-blue-600 dark:text-blue-400 mb-2">
-                  May 2024 • University of Waterloo
-                </p>
-                <p className="text-gray-600 dark:text-gray-300 mb-4">
-                  An invitation-only competition for the top performers in the Senior CCC. The top performers at the CCO may be selected to represent Canada at the International Olympiad in Informatics (IOI).
-                </p>
-                <a 
-                  href="https://cemc.uwaterloo.ca/contests/computing.html" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
-                >
-                  Learn more →
-                </a>
-              </div>
-            </div>
-          </div>
-          
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border border-gray-200 dark:border-gray-700">
-            <div className="flex items-start gap-4">
-              <div className="bg-yellow-100 dark:bg-yellow-900 p-3 rounded-lg">
-                <CalendarIcon className="h-6 w-6 text-yellow-600 dark:text-yellow-400" />
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  ECOO Programming Contest
-                </h3>
-                <p className="text-sm text-blue-600 dark:text-blue-400 mb-2">
-                  April 2024 • Ontario
-                </p>
-                <p className="text-gray-600 dark:text-gray-300 mb-4">
-                  The Educational Computing Organization of Ontario programming contest is a team competition for high school students in Ontario with regional and provincial rounds.
-                </p>
-                <a 
-                  href="https://ecoocs.org/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
-                >
-                  Learn more →
-                </a>
-              </div>
-            </div>
-          </div>
         </div>
       )}
     </div>
