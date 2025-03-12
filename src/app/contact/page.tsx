@@ -1,9 +1,9 @@
 import { ChatBubbleLeftRightIcon, EnvelopeIcon } from '@heroicons/react/24/outline';
 
 const contacts = [
-  { name: 'Jeevithan Muhunthan', email: 'muhuj2794@wrdsb.ca', role: 'Executive' },
-  { name: 'Kevin Chang', email: 'chank1816@wrdsb.ca', role: 'Executive' },
-  { name: 'Raymon Drost', email: 'drosr4740@wrdsb.ca', role: 'Executive' },
+  { name: 'Jeevithan Muhunthan', email: 'muhuj2794@wrdsb.ca', role: 'Co-President' },
+  { name: 'Kevin Chang', email: 'chank1816@wrdsb.ca', role: 'Co-President' },
+  { name: 'Raymon Drost', email: 'drosr4740@wrdsb.ca', role: 'Co-President' },
   { name: 'Russell Morland', email: 'morlr6015@wrdsb.ca', role: 'Executive' }
 ];
 
@@ -70,6 +70,7 @@ export default function ContactPage() {
                 <li key={contact.email} className="flex items-center p-4 hover:bg-gray-50 dark:hover:bg-gray-800">
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-sm font-medium text-gray-900 dark:text-white">{contact.name}</p>
+                    <p className="truncate text-sm text-gray-500 dark:text-gray-400">{contact.email}</p>
                     <p className="truncate text-sm text-gray-500 dark:text-gray-400">{contact.role}</p>
                   </div>
                   <a
