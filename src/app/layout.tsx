@@ -7,7 +7,7 @@ import { Navigation } from "@/components/Navigation";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "CHCI CodingClub",
+  title: "CHCI Coding Club",
   description: "Welcome to the CHCI Coding Club website",
 };
 
