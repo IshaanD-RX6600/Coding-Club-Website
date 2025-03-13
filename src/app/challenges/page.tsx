@@ -4,12 +4,15 @@ import { useState } from 'react';
 import WeeklyProblems from '@/components/WeeklyProblems';
 import { CalendarIcon, TrophyIcon, SparklesIcon } from '@heroicons/react/24/outline';
 import { FaChevronDown, FaChevronUp, FaExternalLinkAlt } from 'react-icons/fa';
+import { ChevronDownIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 
 type Tab = 'problems' | 'hackathons' | 'contests';
 
 export default function ChallengesPage() {
   const [activeTab, setActiveTab] = useState<Tab>('problems');
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
+  const [openSection, setOpenSection] = useState<string | null>(null);
+  const [openDifficulty, setOpenDifficulty] = useState<string | null>(null);
 
   const leetcodeProblems = {
     beginner: [
@@ -97,7 +100,7 @@ export default function ChallengesPage() {
               <WeeklyProblems />
             </div>
 
-            <div>
+            <div className="mt-4">
               <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">LeetCode Problems</h2>
               
               <div className="space-y-4">
@@ -105,20 +108,16 @@ export default function ChallengesPage() {
                 <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-sm border border-gray-200 dark:border-gray-700">
                   <button
                     onClick={() => setExpandedCategory(expandedCategory === 'beginner' ? null : 'beginner')}
-                    className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300"
                   >
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Beginner</h3>
-                    {expandedCategory === 'beginner' ? (
-                      <FaChevronUp className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-                    ) : (
-                      <FaChevronDown className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-                    )}
+                    <FaChevronDown className={`h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform duration-300 ${expandedCategory === 'beginner' ? 'rotate-180' : ''}`} />
                   </button>
-                  
-                  {expandedCategory === 'beginner' && (
+                
+                  <div className={`overflow-hidden transition-all duration-300 ${expandedCategory === 'beginner' ? 'max-h-[500px] animate-slide-down' : 'max-h-0 animate-slide-up'}`}>
                     <div className="px-4 py-3 space-y-3 border-t border-gray-200 dark:border-gray-700">
                       {leetcodeProblems.beginner.map((problem, index) => (
-                        <div key={index} className="flex items-center justify-between bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600">
+                        <div key={index} className="flex items-center justify-between bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600 transform transition-all duration-300 hover:scale-[1.02]">
                           <div className="flex-1">
                             <h4 className="font-medium text-gray-900 dark:text-white">Problem {index + 1}: {problem.title}</h4>
                           </div>
@@ -126,34 +125,30 @@ export default function ChallengesPage() {
                             href={problem.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors duration-300"
                           >
                             Solve <FaExternalLinkAlt className="h-4 w-4" />
                           </a>
                         </div>
                       ))}
                     </div>
-                  )}
+                  </div>
                 </div>
 
                 {/* Medium Problems */}
                 <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-sm border border-gray-200 dark:border-gray-700">
                   <button
                     onClick={() => setExpandedCategory(expandedCategory === 'medium' ? null : 'medium')}
-                    className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300"
                   >
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Medium</h3>
-                    {expandedCategory === 'medium' ? (
-                      <FaChevronUp className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-                    ) : (
-                      <FaChevronDown className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-                    )}
+                    <FaChevronDown className={`h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform duration-300 ${expandedCategory === 'medium' ? 'rotate-180' : ''}`} />
                   </button>
-                  
-                  {expandedCategory === 'medium' && (
+                
+                  <div className={`overflow-hidden transition-all duration-300 ${expandedCategory === 'medium' ? 'max-h-[500px] animate-slide-down' : 'max-h-0 animate-slide-up'}`}>
                     <div className="px-4 py-3 space-y-3 border-t border-gray-200 dark:border-gray-700">
                       {leetcodeProblems.medium.map((problem, index) => (
-                        <div key={index} className="flex items-center justify-between bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600">
+                        <div key={index} className="flex items-center justify-between bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600 transform transition-all duration-300 hover:scale-[1.02]">
                           <div className="flex-1">
                             <h4 className="font-medium text-gray-900 dark:text-white">Problem {index + 1}: {problem.title}</h4>
                           </div>
@@ -161,34 +156,30 @@ export default function ChallengesPage() {
                             href={problem.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors duration-300"
                           >
                             Solve <FaExternalLinkAlt className="h-4 w-4" />
                           </a>
                         </div>
                       ))}
                     </div>
-                  )}
+                  </div>
                 </div>
 
                 {/* Advanced Problems */}
                 <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-sm border border-gray-200 dark:border-gray-700">
                   <button
                     onClick={() => setExpandedCategory(expandedCategory === 'advanced' ? null : 'advanced')}
-                    className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300"
                   >
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Advanced</h3>
-                    {expandedCategory === 'advanced' ? (
-                      <FaChevronUp className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-                    ) : (
-                      <FaChevronDown className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-                    )}
+                    <FaChevronDown className={`h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform duration-300 ${expandedCategory === 'advanced' ? 'rotate-180' : ''}`} />
                   </button>
-                  
-                  {expandedCategory === 'advanced' && (
+                
+                  <div className={`overflow-hidden transition-all duration-300 ${expandedCategory === 'advanced' ? 'max-h-[500px] animate-slide-down' : 'max-h-0 animate-slide-up'}`}>
                     <div className="px-4 py-3 space-y-3 border-t border-gray-200 dark:border-gray-700">
                       {leetcodeProblems.advanced.map((problem, index) => (
-                        <div key={index} className="flex items-center justify-between bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600">
+                        <div key={index} className="flex items-center justify-between bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600 transform transition-all duration-300 hover:scale-[1.02]">
                           <div className="flex-1">
                             <h4 className="font-medium text-gray-900 dark:text-white">Problem {index + 1}: {problem.title}</h4>
                           </div>
@@ -196,14 +187,14 @@ export default function ChallengesPage() {
                             href={problem.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors duration-300"
                           >
                             Solve <FaExternalLinkAlt className="h-4 w-4" />
                           </a>
                         </div>
                       ))}
                     </div>
-                  )}
+                  </div>
                 </div>
               </div>
             </div>
@@ -216,20 +207,16 @@ export default function ChallengesPage() {
                 <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-sm border border-gray-200 dark:border-gray-700">
                   <button
                     onClick={() => setExpandedCategory(expandedCategory === 'hr-beginner' ? null : 'hr-beginner')}
-                    className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300"
                   >
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Beginner</h3>
-                    {expandedCategory === 'hr-beginner' ? (
-                      <FaChevronUp className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-                    ) : (
-                      <FaChevronDown className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-                    )}
+                    <FaChevronDown className={`h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform duration-300 ${expandedCategory === 'hr-beginner' ? 'rotate-180' : ''}`} />
                   </button>
-                  
-                  {expandedCategory === 'hr-beginner' && (
+                
+                  <div className={`overflow-hidden transition-all duration-300 ${expandedCategory === 'hr-beginner' ? 'max-h-[500px] animate-slide-down' : 'max-h-0 animate-slide-up'}`}>
                     <div className="px-4 py-3 space-y-3 border-t border-gray-200 dark:border-gray-700">
                       {hackerrankProblems.beginner.map((problem, index) => (
-                        <div key={index} className="flex items-center justify-between bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600">
+                        <div key={index} className="flex items-center justify-between bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600 transform transition-all duration-300 hover:scale-[1.02]">
                           <div className="flex-1">
                             <h4 className="font-medium text-gray-900 dark:text-white">Problem {index + 1}: {problem.title}</h4>
                           </div>
@@ -237,34 +224,30 @@ export default function ChallengesPage() {
                             href={problem.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors duration-300"
                           >
                             Solve <FaExternalLinkAlt className="h-4 w-4" />
                           </a>
                         </div>
                       ))}
                     </div>
-                  )}
+                  </div>
                 </div>
 
                 {/* Medium Problems */}
                 <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-sm border border-gray-200 dark:border-gray-700">
                   <button
                     onClick={() => setExpandedCategory(expandedCategory === 'hr-medium' ? null : 'hr-medium')}
-                    className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300"
                   >
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Medium</h3>
-                    {expandedCategory === 'hr-medium' ? (
-                      <FaChevronUp className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-                    ) : (
-                      <FaChevronDown className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-                    )}
+                    <FaChevronDown className={`h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform duration-300 ${expandedCategory === 'hr-medium' ? 'rotate-180' : ''}`} />
                   </button>
-                  
-                  {expandedCategory === 'hr-medium' && (
+                
+                  <div className={`overflow-hidden transition-all duration-300 ${expandedCategory === 'hr-medium' ? 'max-h-[500px] animate-slide-down' : 'max-h-0 animate-slide-up'}`}>
                     <div className="px-4 py-3 space-y-3 border-t border-gray-200 dark:border-gray-700">
                       {hackerrankProblems.medium.map((problem, index) => (
-                        <div key={index} className="flex items-center justify-between bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600">
+                        <div key={index} className="flex items-center justify-between bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600 transform transition-all duration-300 hover:scale-[1.02]">
                           <div className="flex-1">
                             <h4 className="font-medium text-gray-900 dark:text-white">Problem {index + 1}: {problem.title}</h4>
                           </div>
@@ -272,34 +255,30 @@ export default function ChallengesPage() {
                             href={problem.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors duration-300"
                           >
                             Solve <FaExternalLinkAlt className="h-4 w-4" />
                           </a>
                         </div>
                       ))}
                     </div>
-                  )}
+                  </div>
                 </div>
 
                 {/* Hard Problems */}
                 <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-sm border border-gray-200 dark:border-gray-700">
                   <button
                     onClick={() => setExpandedCategory(expandedCategory === 'hr-hard' ? null : 'hr-hard')}
-                    className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300"
                   >
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Hard</h3>
-                    {expandedCategory === 'hr-hard' ? (
-                      <FaChevronUp className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-                    ) : (
-                      <FaChevronDown className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-                    )}
+                    <FaChevronDown className={`h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform duration-300 ${expandedCategory === 'hr-hard' ? 'rotate-180' : ''}`} />
                   </button>
-                  
-                  {expandedCategory === 'hr-hard' && (
+                
+                  <div className={`overflow-hidden transition-all duration-300 ${expandedCategory === 'hr-hard' ? 'max-h-[500px] animate-slide-down' : 'max-h-0 animate-slide-up'}`}>
                     <div className="px-4 py-3 space-y-3 border-t border-gray-200 dark:border-gray-700">
                       {hackerrankProblems.hard.map((problem, index) => (
-                        <div key={index} className="flex items-center justify-between bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600">
+                        <div key={index} className="flex items-center justify-between bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600 transform transition-all duration-300 hover:scale-[1.02]">
                           <div className="flex-1">
                             <h4 className="font-medium text-gray-900 dark:text-white">Problem {index + 1}: {problem.title}</h4>
                           </div>
@@ -307,14 +286,14 @@ export default function ChallengesPage() {
                             href={problem.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors duration-300"
                           >
                             Solve <FaExternalLinkAlt className="h-4 w-4" />
                           </a>
                         </div>
                       ))}
                     </div>
-                  )}
+                  </div>
                 </div>
               </div>
             </div>

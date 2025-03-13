@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { weeks } from '@/data/workshops';
 import { PresentationChartBarIcon, BeakerIcon } from '@heroicons/react/24/outline';
+import { FaChevronDown } from 'react-icons/fa';
 
 export function WorkshopList() {
   const [expandedWeek, setExpandedWeek] = useState<number | null>(null);
@@ -16,29 +17,21 @@ export function WorkshopList() {
         >
           <button
             onClick={() => setExpandedWeek(expandedWeek === week.number ? null : week.number)}
-            className="flex w-full items-center justify-between p-4 text-left"
+            className="flex w-full items-center justify-between p-4 text-left hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-300"
           >
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               Week {week.number}
             </h3>
-            <svg
-              className={`h-5 w-5 transform text-gray-500 transition-transform dark:text-gray-400 ${
-                expandedWeek === week.number ? 'rotate-180' : ''
-              }`}
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-            </svg>
+            <FaChevronDown className={`h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform duration-300 ${expandedWeek === week.number ? 'rotate-180' : ''}`} />
           </button>
-          {expandedWeek === week.number && (
+          
+          <div className={`overflow-hidden transition-all duration-300 ${expandedWeek === week.number ? 'max-h-[500px] animate-slide-down' : 'max-h-0 animate-slide-up'}`}>
             <div className="border-t border-gray-200 p-4 dark:border-gray-800">
               <div className="space-y-4">
                 {week.workshops.map((workshop, index) => (
                   <div
                     key={index}
-                    className="rounded-lg border border-gray-100 bg-gray-50 p-4 dark:border-gray-800 dark:bg-gray-800"
+                    className="rounded-lg border border-gray-100 bg-gray-50 p-4 dark:border-gray-800 dark:bg-gray-800 transform transition-all duration-300 hover:scale-[1.02]"
                   >
                     <div className="flex items-start space-x-3">
                       {workshop.type === 'presentation' ? (
@@ -51,7 +44,7 @@ export function WorkshopList() {
                           href={workshop.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="font-medium text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+                          className="font-medium text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors duration-300"
                         >
                           {workshop.title}
                         </a>
@@ -66,7 +59,7 @@ export function WorkshopList() {
                 ))}
               </div>
             </div>
-          )}
+          </div>
         </div>
       ))}
     </div>

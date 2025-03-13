@@ -25,8 +25,10 @@ export function Navigation() {
         <div className="flex h-16 justify-between">
           <div className="flex">
             <div className="flex flex-shrink-0 items-center">
-              <Link href="/" className="text-xl font-bold">
-                CHCI Coding Club
+              <Link href="/" className="text-xl font-bold group">
+                <span className="bg-clip-text group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-blue-500 group-hover:animate-gradient-x transition-colors duration-300">
+                  CHCI Coding Club
+                </span>
               </Link>
             </div>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">

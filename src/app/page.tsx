@@ -21,69 +21,103 @@ const projects = [
 export default function Home() {
   return (
     <div className="animate-fadeIn">
-      {/* Hero Section */}
-      <div className="relative bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-950">
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-          <div className="text-center mb-12">
-            <h1 className="animate-fadeInUp text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">
+      {/* Hero Section with Animated Background */}
+      <div className="relative flex flex-col items-center justify-center text-center px-4 overflow-hidden bg-white dark:bg-gray-950">
+        {/* Floating Bubbles */}
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Large bubbles */}
+          <div className="absolute bottom-[80vh] left-[10%] w-24 h-24 bg-gradient-to-br from-indigo-500 to-blue-500 dark:from-indigo-400 dark:to-blue-400 rounded-full animate-float-slow animate-color-cycle"></div>
+          <div className="absolute bottom-[85vh] left-[20%] w-32 h-32 bg-gradient-to-br from-purple-500 to-indigo-500 dark:from-purple-400 dark:to-indigo-400 rounded-full animate-float animate-color-cycle delay-1000"></div>
+          <div className="absolute bottom-[75vh] left-[40%] w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-500 dark:from-blue-400 dark:to-purple-400 rounded-full animate-float-fast animate-color-cycle delay-[2000ms]"></div>
+          <div className="absolute bottom-[90vh] left-[60%] w-28 h-28 bg-gradient-to-br from-indigo-500 to-blue-500 dark:from-indigo-400 dark:to-blue-400 rounded-full animate-float animate-color-cycle delay-[3000ms]"></div>
+          <div className="absolute bottom-[70vh] left-[80%] w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-500 dark:from-purple-400 dark:to-indigo-400 rounded-full animate-float-slow animate-color-cycle delay-[4000ms]"></div>
+          
+          {/* Small bubbles */}
+          <div className="absolute bottom-[95vh] left-[5%] w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-500 dark:from-blue-400 dark:to-purple-400 rounded-full animate-float-fast animate-color-cycle delay-[500ms]"></div>
+          <div className="absolute bottom-[65vh] left-[25%] w-12 h-12 bg-gradient-to-br from-indigo-500 to-blue-500 dark:from-indigo-400 dark:to-blue-400 rounded-full animate-float animate-color-cycle delay-[1500ms]"></div>
+          <div className="absolute bottom-[88vh] left-[45%] w-10 h-10 bg-gradient-to-br from-purple-500 to-indigo-500 dark:from-purple-400 dark:to-indigo-400 rounded-full animate-float-slow animate-color-cycle delay-[2500ms]"></div>
+          <div className="absolute bottom-[72vh] left-[65%] w-6 h-6 bg-gradient-to-br from-blue-500 to-purple-500 dark:from-blue-400 dark:to-purple-400 rounded-full animate-float-fast animate-color-cycle delay-[3500ms]"></div>
+          <div className="absolute bottom-[92vh] left-[85%] w-14 h-14 bg-gradient-to-br from-indigo-500 to-blue-500 dark:from-indigo-400 dark:to-blue-400 rounded-full animate-float animate-color-cycle delay-[4500ms]"></div>
+          
+          {/* Continuous flow bubbles */}
+          <div className="absolute bottom-[40vh] left-[15%] w-20 h-20 bg-gradient-to-br from-purple-500 to-indigo-500 dark:from-purple-400 dark:to-indigo-400 rounded-full animate-float-slow animate-color-cycle delay-[5000ms]"></div>
+          <div className="absolute bottom-[35vh] left-[35%] w-28 h-28 bg-gradient-to-br from-blue-500 to-purple-500 dark:from-blue-400 dark:to-purple-400 rounded-full animate-float animate-color-cycle delay-[5500ms]"></div>
+          <div className="absolute bottom-[45vh] left-[55%] w-24 h-24 bg-gradient-to-br from-indigo-500 to-blue-500 dark:from-indigo-400 dark:to-blue-400 rounded-full animate-float-fast animate-color-cycle delay-[6000ms]"></div>
+          <div className="absolute bottom-[30vh] left-[75%] w-32 h-32 bg-gradient-to-br from-purple-500 to-indigo-500 dark:from-purple-400 dark:to-indigo-400 rounded-full animate-float animate-color-cycle delay-[6500ms]"></div>
+          
+          {/* Bottom bubbles */}
+          <div className="absolute bottom-0 left-[10%] w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 dark:from-blue-400 dark:to-purple-400 rounded-full animate-float-fast animate-color-cycle delay-[7000ms]"></div>
+          <div className="absolute bottom-0 left-[30%] w-8 h-8 bg-gradient-to-br from-indigo-500 to-blue-500 dark:from-indigo-400 dark:to-blue-400 rounded-full animate-float animate-color-cycle delay-[7500ms]"></div>
+          <div className="absolute bottom-0 left-[50%] w-12 h-12 bg-gradient-to-br from-purple-500 to-indigo-500 dark:from-purple-400 dark:to-indigo-400 rounded-full animate-float-slow animate-color-cycle delay-[8000ms]"></div>
+          <div className="absolute bottom-0 left-[70%] w-6 h-6 bg-gradient-to-br from-blue-500 to-purple-500 dark:from-blue-400 dark:to-purple-400 rounded-full animate-float-fast animate-color-cycle delay-[8500ms]"></div>
+        </div>
+        
+        {/* Hero Content */}
+        <div className="min-h-[80vh] flex flex-col items-center justify-center">
+          <div className="relative z-10 max-w-4xl mx-auto">
+            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
               Welcome to CHCI Coding Club
             </h1>
-            <p className="mt-6 animate-fadeInUp mx-auto max-w-2xl text-lg leading-8 text-gray-600 dark:text-gray-400 [animation-delay:200ms]">
+            <p className="text-lg md:text-xl text-gray-700 dark:text-gray-200 mb-8">
               Join us to learn programming, solve challenges, and build amazing projects together.
             </p>
-            <div className="mt-8 flex justify-center gap-4">
-              <Link 
-                href="/contact" 
-                className="animate-fadeInUp rounded-lg bg-blue-600 px-6 py-3 text-white transition-transform hover:bg-blue-700 hover:scale-105 dark:bg-blue-500 dark:hover:bg-blue-600 [animation-delay:400ms]"
+            <div className="flex flex-wrap justify-center gap-4">
+              <a
+                href="https://discord.gg/hgQWvpYm"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-300"
               >
                 Join the Club
-              </Link>
-              <Link 
-                href="/projects" 
-                className="animate-fadeInUp rounded-lg border border-gray-300 bg-white px-6 py-3 text-gray-700 transition-transform hover:bg-gray-50 hover:scale-105 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700 [animation-delay:600ms]"
+              </a>
+              <a
+                href="/projects"
+                className="px-6 py-3 bg-gray-800 hover:bg-gray-700 text-white font-medium rounded-lg transition-colors duration-300"
               >
                 Featured Projects
-              </Link>
+              </a>
+            </div>
+
+            {/* Club Photo */}
+            <div className="mt-12 relative w-full max-w-3xl mx-auto h-[400px] rounded-xl overflow-hidden shadow-2xl">
+              <div className="absolute inset-0 bg-black/10 backdrop-blur-sm rounded-xl"></div>
+              <Placeholder text="Coding Club Group Photo" className="rounded-xl" />
             </div>
           </div>
-          
-          <div className="animate-fadeIn relative mt-12 h-[400px] w-full overflow-hidden rounded-xl shadow-xl [animation-delay:300ms]">
-            <Placeholder text="Coding Club Group Photo" />
-          </div>
         </div>
-      </div>
 
-      {/* About Section */}
-      <div className="bg-white py-16 dark:bg-gray-950">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <h2 className="animate-fadeInUp text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
-              About Our Club
-            </h2>
-            <p className="mt-4 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              A community of passionate coders learning and building together
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
-            <div className="animate-fadeInUp flex flex-col items-center rounded-xl bg-blue-50 p-8 text-center transition-transform hover:shadow-md dark:bg-gray-900 [animation-delay:200ms]">
-              <div className="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center mb-4 dark:bg-blue-900">
-                <MapPinIcon className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Where We Meet</h3>
-              <p className="mt-4 text-gray-600 dark:text-gray-400">
-                Room C137 (Right in front of the Gym)
+        {/* About Content */}
+        <div className="relative z-10 w-full py-16">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-10">
+              <h2 className="animate-fadeInUp text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+                About Our Club
+              </h2>
+              <p className="mt-4 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                A community of passionate coders learning and building together
               </p>
             </div>
             
-            <div className="animate-fadeInUp flex flex-col items-center rounded-xl bg-blue-50 p-8 text-center transition-transform hover:shadow-md dark:bg-gray-900 [animation-delay:400ms]">
-              <div className="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center mb-4 dark:bg-blue-900">
-                <ClockIcon className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
+              <div className="animate-fadeInUp flex flex-col items-center rounded-xl bg-blue-50 p-8 text-center transition-transform hover:shadow-md dark:bg-gray-900 [animation-delay:200ms]">
+                <div className="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center mb-4 dark:bg-blue-900">
+                  <MapPinIcon className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Where We Meet</h3>
+                <p className="mt-4 text-gray-600 dark:text-gray-400">
+                  Room C137 (Right in front of the Gym)
+                </p>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">When We Meet</h3>
-              <p className="mt-4 text-gray-600 dark:text-gray-400">
-                Every Thursday from 2:30 PM to 4:00 PM
-              </p>
+              
+              <div className="animate-fadeInUp flex flex-col items-center rounded-xl bg-blue-50 p-8 text-center transition-transform hover:shadow-md dark:bg-gray-900 [animation-delay:400ms]">
+                <div className="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center mb-4 dark:bg-blue-900">
+                  <ClockIcon className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">When We Meet</h3>
+                <p className="mt-4 text-gray-600 dark:text-gray-400">
+                  Every Thursday from 2:30 PM to 4:00 PM
+                </p>
+              </div>
             </div>
           </div>
         </div>
