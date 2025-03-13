@@ -3,8 +3,9 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ThemeToggle } from './ThemeToggle';
-import { useState } from 'react';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { useState, useEffect } from 'react';
+import { Bars3Icon, XMarkIcon, ShieldCheckIcon } from '@heroicons/react/24/outline';
+import { useAdmin } from '@/contexts/AdminContext';
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -18,6 +19,13 @@ const navigation = [
 export function Navigation() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isAdmin, loading } = useAdmin();
+  const [adminMounted, setAdminMounted] = useState(false);
+
+  // Only show the admin link after client-side hydration to prevent hydration mismatch
+  useEffect(() => {
+    setAdminMounted(true);
+  }, []);
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-sm dark:border-gray-800 dark:bg-gray-950/80">
@@ -49,6 +57,18 @@ export function Navigation() {
           </div>
           <div className="flex items-center">
             <ThemeToggle />
+            
+            {/* Admin Link - only shown to admins */}
+            {adminMounted && isAdmin && (
+              <Link
+                href="/admin"
+                className="ml-4 flex items-center rounded-lg bg-purple-600 px-4 py-2 text-sm font-medium text-white hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600"
+              >
+                <ShieldCheckIcon className="mr-2 h-4 w-4" />
+                Admin
+              </Link>
+            )}
+            
             <a
               href="https://discord.gg/hgQWvpYm"
               target="_blank"
@@ -93,6 +113,18 @@ export function Navigation() {
                 {item.name}
               </Link>
             ))}
+            
+            {/* Admin Link in Mobile Menu - only shown to admins */}
+            {adminMounted && isAdmin && (
+              <Link
+                href="/admin"
+                className="block rounded-md px-3 py-2 text-base font-medium bg-purple-100 text-purple-600 dark:bg-purple-900/50 dark:text-purple-400"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Admin Dashboard
+              </Link>
+            )}
+            
             <a
               href="https://discord.gg/hgQWvpYm"
               target="_blank"
