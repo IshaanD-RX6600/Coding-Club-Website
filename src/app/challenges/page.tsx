@@ -3,11 +3,31 @@
 import { useState } from 'react';
 import WeeklyProblems from '@/components/WeeklyProblems';
 import { CalendarIcon, TrophyIcon, SparklesIcon } from '@heroicons/react/24/outline';
+import { FaChevronDown, FaChevronUp, FaExternalLinkAlt } from 'react-icons/fa';
 
 type Tab = 'problems' | 'hackathons' | 'contests';
 
 export default function ChallengesPage() {
   const [activeTab, setActiveTab] = useState<Tab>('problems');
+  const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
+
+  const leetcodeProblems = {
+    beginner: [
+      { title: 'Two Sum', link: 'https://leetcode.com/problems/two-sum/description/' },
+      { title: 'Palindrome Number', link: 'https://leetcode.com/problems/palindrome-number/description/' },
+      { title: 'Roman to Integer', link: 'https://leetcode.com/problems/roman-to-integer/description/' }
+    ],
+    medium: [
+      { title: 'Zero Array Transformation II', link: 'https://leetcode.com/problems/zero-array-transformation-ii/description/?envType=daily-question&envId=2025-03-13' },
+      { title: 'Add Two Numbers', link: 'https://leetcode.com/problems/add-two-numbers/description/' },
+      { title: 'ZigZag Conversion', link: 'https://leetcode.com/problems/zigzag-conversion/description/' }
+    ],
+    advanced: [
+      { title: 'Regular Expression Matching', link: 'https://leetcode.com/problems/regular-expression-matching/description/' },
+      { title: 'Reverse Nodes in K-Group', link: 'https://leetcode.com/problems/reverse-nodes-in-k-group/description/' },
+      { title: 'Substring with Concatenation of All Words', link: 'https://leetcode.com/problems/substring-with-concatenation-of-all-words/description/' }
+    ]
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -53,9 +73,122 @@ export default function ChallengesPage() {
 
       {activeTab === 'problems' && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div>
-            <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">DMOJ Problems</h2>
-            <WeeklyProblems />
+          <div className="space-y-8">
+            <div>
+              <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">DMOJ Problems</h2>
+              <WeeklyProblems />
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">LeetCode Problems</h2>
+              
+              <div className="space-y-4">
+                {/* Beginner Problems */}
+                <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-sm border border-gray-200 dark:border-gray-700">
+                  <button
+                    onClick={() => setExpandedCategory(expandedCategory === 'beginner' ? null : 'beginner')}
+                    className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                  >
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Beginner</h3>
+                    {expandedCategory === 'beginner' ? (
+                      <FaChevronUp className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+                    ) : (
+                      <FaChevronDown className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+                    )}
+                  </button>
+                  
+                  {expandedCategory === 'beginner' && (
+                    <div className="px-4 py-3 space-y-3 border-t border-gray-200 dark:border-gray-700">
+                      {leetcodeProblems.beginner.map((problem, index) => (
+                        <div key={index} className="flex items-center justify-between bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600">
+                          <div className="flex-1">
+                            <h4 className="font-medium text-gray-900 dark:text-white">Problem {index + 1}: {problem.title}</h4>
+                          </div>
+                          <a
+                            href={problem.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                          >
+                            Solve <FaExternalLinkAlt className="h-4 w-4" />
+                          </a>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Medium Problems */}
+                <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-sm border border-gray-200 dark:border-gray-700">
+                  <button
+                    onClick={() => setExpandedCategory(expandedCategory === 'medium' ? null : 'medium')}
+                    className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                  >
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Medium</h3>
+                    {expandedCategory === 'medium' ? (
+                      <FaChevronUp className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+                    ) : (
+                      <FaChevronDown className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+                    )}
+                  </button>
+                  
+                  {expandedCategory === 'medium' && (
+                    <div className="px-4 py-3 space-y-3 border-t border-gray-200 dark:border-gray-700">
+                      {leetcodeProblems.medium.map((problem, index) => (
+                        <div key={index} className="flex items-center justify-between bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600">
+                          <div className="flex-1">
+                            <h4 className="font-medium text-gray-900 dark:text-white">Problem {index + 1}: {problem.title}</h4>
+                          </div>
+                          <a
+                            href={problem.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                          >
+                            Solve <FaExternalLinkAlt className="h-4 w-4" />
+                          </a>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Advanced Problems */}
+                <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-sm border border-gray-200 dark:border-gray-700">
+                  <button
+                    onClick={() => setExpandedCategory(expandedCategory === 'advanced' ? null : 'advanced')}
+                    className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                  >
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Advanced</h3>
+                    {expandedCategory === 'advanced' ? (
+                      <FaChevronUp className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+                    ) : (
+                      <FaChevronDown className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+                    )}
+                  </button>
+                  
+                  {expandedCategory === 'advanced' && (
+                    <div className="px-4 py-3 space-y-3 border-t border-gray-200 dark:border-gray-700">
+                      {leetcodeProblems.advanced.map((problem, index) => (
+                        <div key={index} className="flex items-center justify-between bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600">
+                          <div className="flex-1">
+                            <h4 className="font-medium text-gray-900 dark:text-white">Problem {index + 1}: {problem.title}</h4>
+                          </div>
+                          <a
+                            href={problem.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                          >
+                            Solve <FaExternalLinkAlt className="h-4 w-4" />
+                          </a>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
 
           <div>
