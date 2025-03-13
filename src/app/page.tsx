@@ -55,6 +55,8 @@ export default function Home() {
         {/* Hero Content */}
         <div className="min-h-[80vh] flex flex-col items-center justify-center">
           <div className="relative z-10 max-w-4xl mx-auto">
+            <br></br>
+            <br></br>
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
               Welcome to CHCI Coding Club
             </h1>
