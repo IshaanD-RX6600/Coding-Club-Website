@@ -14,9 +14,22 @@ interface GalleryGridProps {
 export function GalleryGrid({ images, columns = 3 }: GalleryGridProps) {
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
 
+  // Define column classes based on the columns prop
+  const getColumnClass = () => {
+    switch (columns) {
+      case 2:
+        return 'grid-cols-1 sm:grid-cols-2';
+      case 4:
+        return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4';
+      case 3:
+      default:
+        return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3';
+    }
+  };
+
   return (
     <div>
-      <div className={`grid grid-cols-1 md:grid-cols-${columns} gap-4`}>
+      <div className={`grid ${getColumnClass()} gap-4`}>
         {images.map((image) => (
           <div
             key={image.id}
