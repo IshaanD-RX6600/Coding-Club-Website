@@ -32,6 +32,10 @@ export default function Home() {
               <p className="mt-6 animate-fadeInUp text-lg leading-8 text-gray-600 dark:text-gray-400 [animation-delay:200ms]">
                 Join us to learn programming, solve challenges, and build amazing projects together.
               </p>
+              <br></br>
+              <h1 className="text-2xl font-bold">About the Club</h1>
+              <p className="mt-2">Location: Room C137 (Right in front of the Gym)</p>
+              <p className="mt-2">Meeting Time: Every Thursday from 2:30 PM to 4:00 PM</p>
               <div className="mt-8 flex gap-4">
                 <Link 
                   href="/contact" 
@@ -57,7 +61,7 @@ export default function Home() {
       </div>
 
       {/* About Section */}
-      <div className="bg-white py-16 dark:bg-gray-950">
+      {/* <div className="bg-white py-16 dark:bg-gray-950">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="animate-fadeInUp text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
@@ -83,7 +87,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Social Links */}
       <div className="border-y bg-white py-8 dark:border-gray-800 dark:bg-gray-950">
