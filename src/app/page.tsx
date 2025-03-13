@@ -56,6 +56,35 @@ export default function Home() {
         </div>
       </div>
 
+      {/* About Section */}
+      <div className="bg-white py-16 dark:bg-gray-950">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="animate-fadeInUp text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+              About Our Club
+            </h2>
+            <div className="mx-auto mt-8 max-w-3xl">
+              <div className="animate-fadeInUp rounded-lg bg-blue-50 p-6 dark:bg-gray-900 [animation-delay:200ms]">
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Location</h3>
+                    <p className="mt-2 text-gray-600 dark:text-gray-400">
+                      Room C137 (Right in front of the Gym)
+                    </p>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Meeting Time</h3>
+                    <p className="mt-2 text-gray-600 dark:text-gray-400">
+                      Every Thursday from 2:30 PM to 4:00 PM
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Social Links */}
       <div className="border-y bg-white py-8 dark:border-gray-800 dark:bg-gray-950">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
