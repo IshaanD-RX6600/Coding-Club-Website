@@ -29,6 +29,24 @@ export default function ChallengesPage() {
     ]
   };
 
+  const hackerrankProblems = {
+    beginner: [
+      { title: 'Subarray Division', link: 'https://www.hackerrank.com/challenges/the-birthday-bar/problem?isFullScreen=true' },
+      { title: 'Simple Array Sum', link: 'https://www.hackerrank.com/challenges/simple-array-sum/problem?isFullScreen=true' },
+      { title: 'Bill Division', link: 'https://www.hackerrank.com/challenges/bon-appetit/problem?isFullScreen=true' }
+    ],
+    medium: [
+      { title: 'Forming a Magic Square', link: 'https://www.hackerrank.com/challenges/magic-square-forming/problem?isFullScreen=true' },
+      { title: 'Sparse Arrays', link: 'https://www.hackerrank.com/challenges/sparse-arrays/problem?isFullScreen=true' },
+      { title: 'Cycle Detection', link: 'https://www.hackerrank.com/challenges/detect-whether-a-linked-list-contains-a-cycle/problem?isFullScreen=true' }
+    ],
+    hard: [
+      { title: "Kitty's Calculations on a Tree", link: 'https://www.hackerrank.com/challenges/kittys-calculations-on-a-tree/problem?isFullScreen=true' },
+      { title: 'Square-Ten Tree', link: 'https://www.hackerrank.com/challenges/square-ten-tree/problem?isFullScreen=true' },
+      { title: 'Determining DNA Health', link: 'https://www.hackerrank.com/challenges/determining-dna-health/problem?isFullScreen=true' }
+    ]
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Challenges & Competitions</h1>
@@ -170,6 +188,117 @@ export default function ChallengesPage() {
                   {expandedCategory === 'advanced' && (
                     <div className="px-4 py-3 space-y-3 border-t border-gray-200 dark:border-gray-700">
                       {leetcodeProblems.advanced.map((problem, index) => (
+                        <div key={index} className="flex items-center justify-between bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600">
+                          <div className="flex-1">
+                            <h4 className="font-medium text-gray-900 dark:text-white">Problem {index + 1}: {problem.title}</h4>
+                          </div>
+                          <a
+                            href={problem.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                          >
+                            Solve <FaExternalLinkAlt className="h-4 w-4" />
+                          </a>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-8">
+              <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">HackerRank Problems</h2>
+              
+              <div className="space-y-4">
+                {/* Beginner Problems */}
+                <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-sm border border-gray-200 dark:border-gray-700">
+                  <button
+                    onClick={() => setExpandedCategory(expandedCategory === 'hr-beginner' ? null : 'hr-beginner')}
+                    className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                  >
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Beginner</h3>
+                    {expandedCategory === 'hr-beginner' ? (
+                      <FaChevronUp className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+                    ) : (
+                      <FaChevronDown className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+                    )}
+                  </button>
+                  
+                  {expandedCategory === 'hr-beginner' && (
+                    <div className="px-4 py-3 space-y-3 border-t border-gray-200 dark:border-gray-700">
+                      {hackerrankProblems.beginner.map((problem, index) => (
+                        <div key={index} className="flex items-center justify-between bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600">
+                          <div className="flex-1">
+                            <h4 className="font-medium text-gray-900 dark:text-white">Problem {index + 1}: {problem.title}</h4>
+                          </div>
+                          <a
+                            href={problem.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                          >
+                            Solve <FaExternalLinkAlt className="h-4 w-4" />
+                          </a>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Medium Problems */}
+                <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-sm border border-gray-200 dark:border-gray-700">
+                  <button
+                    onClick={() => setExpandedCategory(expandedCategory === 'hr-medium' ? null : 'hr-medium')}
+                    className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                  >
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Medium</h3>
+                    {expandedCategory === 'hr-medium' ? (
+                      <FaChevronUp className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+                    ) : (
+                      <FaChevronDown className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+                    )}
+                  </button>
+                  
+                  {expandedCategory === 'hr-medium' && (
+                    <div className="px-4 py-3 space-y-3 border-t border-gray-200 dark:border-gray-700">
+                      {hackerrankProblems.medium.map((problem, index) => (
+                        <div key={index} className="flex items-center justify-between bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600">
+                          <div className="flex-1">
+                            <h4 className="font-medium text-gray-900 dark:text-white">Problem {index + 1}: {problem.title}</h4>
+                          </div>
+                          <a
+                            href={problem.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                          >
+                            Solve <FaExternalLinkAlt className="h-4 w-4" />
+                          </a>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Hard Problems */}
+                <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-sm border border-gray-200 dark:border-gray-700">
+                  <button
+                    onClick={() => setExpandedCategory(expandedCategory === 'hr-hard' ? null : 'hr-hard')}
+                    className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                  >
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Hard</h3>
+                    {expandedCategory === 'hr-hard' ? (
+                      <FaChevronUp className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+                    ) : (
+                      <FaChevronDown className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+                    )}
+                  </button>
+                  
+                  {expandedCategory === 'hr-hard' && (
+                    <div className="px-4 py-3 space-y-3 border-t border-gray-200 dark:border-gray-700">
+                      {hackerrankProblems.hard.map((problem, index) => (
                         <div key={index} className="flex items-center justify-between bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600">
                           <div className="flex-1">
                             <h4 className="font-medium text-gray-900 dark:text-white">Problem {index + 1}: {problem.title}</h4>
