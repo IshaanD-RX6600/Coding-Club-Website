@@ -1,4 +1,4 @@
-import { UserIcon, PhotoIcon, CodeBracketIcon } from '@heroicons/react/24/outline';
+import { UserIcon, PhotoIcon, CodeBracketIcon, ClockIcon, MapPinIcon } from '@heroicons/react/24/outline';
 import { Placeholder } from '@/components/Placeholder';
 import { GalleryGrid } from '@/components/GalleryGrid';
 import { galleryImages } from '@/data/gallery';
@@ -24,76 +24,85 @@ export default function Home() {
       {/* Hero Section */}
       <div className="relative bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-950">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-8">
-            <div className="flex flex-col justify-center">
-              <h1 className="animate-fadeInUp text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">
-                Welcome to CHCI Coding Club
-              </h1>
-              <p className="mt-6 animate-fadeInUp text-lg leading-8 text-gray-600 dark:text-gray-400 [animation-delay:200ms]">
-                Join us to learn programming, solve challenges, and build amazing projects together.
-              </p>
-              <br></br>
-              <h1 className="text-2xl font-bold">About the Club</h1>
-              <p className="mt-2">Location: Room C137 (Right in front of the Gym)</p>
-              <p className="mt-2">Meeting Time: Every Thursday from 2:30 PM to 4:00 PM</p>
-              <div className="mt-8 flex gap-4">
-                <Link 
-                  href="/contact" 
-                  className="animate-fadeInUp rounded-lg bg-blue-600 px-4 py-2 text-white transition-transform hover:bg-blue-700 hover:scale-105 dark:bg-blue-500 dark:hover:bg-blue-600 [animation-delay:400ms]"
-                >
-                  Join the Club
-                </Link>
-                <a 
-                  href="/projects" 
-                  className="animate-fadeInUp rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 transition-transform hover:bg-gray-50 hover:scale-105 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700 [animation-delay:600ms]"
-                >
-                  Featured Projects
-                </a>
-              </div>
+          <div className="text-center mb-12">
+            <h1 className="animate-fadeInUp text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">
+              Welcome to CHCI Coding Club
+            </h1>
+            <p className="mt-6 animate-fadeInUp mx-auto max-w-2xl text-lg leading-8 text-gray-600 dark:text-gray-400 [animation-delay:200ms]">
+              Join us to learn programming, solve challenges, and build amazing projects together.
+            </p>
+            <div className="mt-8 flex justify-center gap-4">
+              <Link 
+                href="/contact" 
+                className="animate-fadeInUp rounded-lg bg-blue-600 px-6 py-3 text-white transition-transform hover:bg-blue-700 hover:scale-105 dark:bg-blue-500 dark:hover:bg-blue-600 [animation-delay:400ms]"
+              >
+                Join the Club
+              </Link>
+              <Link 
+                href="/projects" 
+                className="animate-fadeInUp rounded-lg border border-gray-300 bg-white px-6 py-3 text-gray-700 transition-transform hover:bg-gray-50 hover:scale-105 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700 [animation-delay:600ms]"
+              >
+                Featured Projects
+              </Link>
             </div>
-            <div className="flex items-center justify-center">
-              <div className="animate-fadeIn relative h-[300px] w-full overflow-hidden rounded-xl shadow-xl [animation-delay:300ms]">
-                <Placeholder text="Coding Club Group Photo" />
-              </div>
-            </div>
+          </div>
+          
+          <div className="animate-fadeIn relative mt-12 h-[400px] w-full overflow-hidden rounded-xl shadow-xl [animation-delay:300ms]">
+            <Placeholder text="Coding Club Group Photo" />
           </div>
         </div>
       </div>
 
       {/* About Section */}
-      {/* <div className="bg-white py-16 dark:bg-gray-950">
+      <div className="bg-white py-16 dark:bg-gray-950">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
+          <div className="text-center mb-10">
             <h2 className="animate-fadeInUp text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
               About Our Club
             </h2>
-            <div className="mx-auto mt-8 max-w-3xl">
-              <div className="animate-fadeInUp rounded-lg bg-blue-50 p-6 dark:bg-gray-900 [animation-delay:200ms]">
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Location</h3>
-                    <p className="mt-2 text-gray-600 dark:text-gray-400">
-                      Room C137 (Right in front of the Gym)
-                    </p>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Meeting Time</h3>
-                    <p className="mt-2 text-gray-600 dark:text-gray-400">
-                      Every Thursday from 2:30 PM to 4:00 PM
-                    </p>
-                  </div>
-                </div>
+            <p className="mt-4 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              A community of passionate coders learning and building together
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
+            <div className="animate-fadeInUp flex flex-col items-center rounded-xl bg-blue-50 p-8 text-center transition-transform hover:shadow-md dark:bg-gray-900 [animation-delay:200ms]">
+              <div className="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center mb-4 dark:bg-blue-900">
+                <MapPinIcon className="h-6 w-6 text-blue-600 dark:text-blue-400" />
               </div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Where We Meet</h3>
+              <p className="mt-4 text-gray-600 dark:text-gray-400">
+                Room C137 (Right in front of the Gym)
+              </p>
+            </div>
+            
+            <div className="animate-fadeInUp flex flex-col items-center rounded-xl bg-blue-50 p-8 text-center transition-transform hover:shadow-md dark:bg-gray-900 [animation-delay:400ms]">
+              <div className="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center mb-4 dark:bg-blue-900">
+                <ClockIcon className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">When We Meet</h3>
+              <p className="mt-4 text-gray-600 dark:text-gray-400">
+                Every Thursday from 2:30 PM to 4:00 PM
+              </p>
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
 
       {/* Social Links */}
-      <div className="border-y bg-white py-8 dark:border-gray-800 dark:bg-gray-950">
+      <div className="bg-gray-50 py-16 dark:bg-gray-900">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="animate-fadeInUp text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+              Connect With Us
+            </h2>
+            <p className="mt-4 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              Stay updated with club announcements and connect with other members
+            </p>
+          </div>
+
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-            <div className="animate-fadeInUp flex flex-col items-center rounded-lg bg-blue-50 p-6 text-center transition-transform hover:scale-105 dark:bg-gray-900 [animation-delay:200ms]">
+            <div className="animate-fadeInUp flex flex-col items-center rounded-lg bg-white p-6 text-center transition-transform hover:scale-105 shadow-sm dark:bg-gray-800 [animation-delay:200ms]">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Join our Google Classroom</h3>
               <p className="mt-2 text-gray-600 dark:text-gray-400">Class Code: <span className="font-mono text-lg font-bold">ABC123</span></p>
               <a 
@@ -105,7 +114,7 @@ export default function Home() {
                 Open Classroom
               </a>
             </div>
-            <div className="animate-fadeInUp flex flex-col items-center rounded-lg bg-blue-50 p-6 text-center transition-transform hover:scale-105 dark:bg-gray-900 [animation-delay:400ms]">
+            <div className="animate-fadeInUp flex flex-col items-center rounded-lg bg-white p-6 text-center transition-transform hover:scale-105 shadow-sm dark:bg-gray-800 [animation-delay:400ms]">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Follow us on Instagram</h3>
               <p className="mt-2 text-gray-600 dark:text-gray-400">@chci.coding.club</p>
               <a 
@@ -117,7 +126,7 @@ export default function Home() {
                 Follow Us
               </a>
             </div>
-            <div className="animate-fadeInUp flex flex-col items-center rounded-lg bg-blue-50 p-6 text-center transition-transform hover:scale-105 dark:bg-gray-900 [animation-delay:600ms]">
+            <div className="animate-fadeInUp flex flex-col items-center rounded-lg bg-white p-6 text-center transition-transform hover:scale-105 shadow-sm dark:bg-gray-800 [animation-delay:600ms]">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Join our Discord</h3>
               <p className="mt-2 text-gray-600 dark:text-gray-400">Connect with other club members</p>
               <a 
@@ -134,12 +143,18 @@ export default function Home() {
       </div>
 
       {/* Club Executives */}
-      <div className="py-16">
+      <div className="bg-white py-16 dark:bg-gray-950">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="animate-fadeInUp text-center text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Club Executives
-          </h2>
-          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="text-center mb-10">
+            <h2 className="animate-fadeInUp text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+              Meet Our Team
+            </h2>
+            <p className="mt-4 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              The dedicated students behind CHCI Coding Club
+            </p>
+          </div>
+
+          <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {executives.map((executive, index) => (
               <div
                 key={executive.name}
@@ -163,19 +178,19 @@ export default function Home() {
       {/* Gallery Section */}
       <div className="bg-gray-50 py-16 dark:bg-gray-900">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
+          <div className="text-center mb-10">
             <h2 className="animate-fadeInUp text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
               Club Memories
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-center text-gray-600 dark:text-gray-400">
-              Highlights from our workshops, events, and club activities.
+            <p className="mt-4 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              Highlights from our workshops, events, and club activities
             </p>
           </div>
           
           <div className="mt-10">
             <GalleryGrid images={galleryImages.slice(0, 6)} columns={3} />
             
-            <div className="mt-8 text-center">
+            <div className="mt-10 text-center">
               <Link 
                 href="/gallery" 
                 className="inline-flex items-center justify-center rounded-lg border border-transparent bg-blue-600 px-5 py-3 text-base font-medium text-white shadow-sm hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
