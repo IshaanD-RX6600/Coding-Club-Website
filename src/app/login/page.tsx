@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Navigation } from '@/components/Navigation';
 
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'codingclub2024';
+
 export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -19,7 +21,7 @@ export default function LoginPage() {
 
     try {
       // Simple password check
-      if (password === 'codingclub2024') {
+      if (password === ADMIN_PASSWORD) {
         // Set admin status
         localStorage.setItem('aefd-gbza-fkew-dsxz', 'true');
         router.push('/admin');

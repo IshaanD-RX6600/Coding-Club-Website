@@ -6,6 +6,14 @@ const nextConfig = {
   },
   output: 'standalone',
   trailingSlash: false,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
+  },
   async redirects() {
     return [];
   },

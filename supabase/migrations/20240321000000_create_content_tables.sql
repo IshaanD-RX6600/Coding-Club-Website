@@ -225,7 +225,7 @@ INSERT INTO executives (
   role,
   order_position
 ) VALUES
-  ('Russell Morland', 12, 'President', 1),
-  ('Raymon Drost', 12, 'Vice President', 2),
-  ('Jeevithan Muhunthan', 10, 'Secretary', 3),
-  ('Kevin Chang', 10, 'Treasurer', 4); 
+  ('Russell Morland', 12, 'Executive', 1),
+  ('Raymon Drost', 12, 'Co-President', 2),
+  ('Jeevithan Muhunthan', 10, 'Co-President', 3),
+  ('Kevin Chang', 10, 'Co-President', 4); 

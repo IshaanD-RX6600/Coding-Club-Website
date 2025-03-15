@@ -19,7 +19,8 @@ const AdminContext = createContext<AdminContextType>({
 export const useAdmin = () => useContext(AdminContext);
 
 // In a real app, this would be an environment variable
-const ADMIN_PASSWORD = 'codingclub2024';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'codingclub2024';
+console.log('ADMIN_PASSWORD:', ADMIN_PASSWORD);
 
 export function AdminProvider({ children }: { children: React.ReactNode }) {
   const [isAdmin, setIsAdmin] = useState(false);

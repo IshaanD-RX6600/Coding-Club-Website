@@ -60,7 +60,7 @@ export default function HeroAdmin() {
     {
       name: 'primary_button_link',
       label: 'Primary Button Link',
-      type: 'url' as const,
+      type: 'text' as const,
       required: true,
     },
     {
@@ -72,7 +72,7 @@ export default function HeroAdmin() {
     {
       name: 'secondary_button_link',
       label: 'Secondary Button Link',
-      type: 'url' as const,
+      type: 'text' as const,
       required: true,
     },
     {
