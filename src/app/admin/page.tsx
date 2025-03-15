@@ -9,7 +9,10 @@ import {
   PhotoIcon,
   LinkIcon,
   HomeIcon,
-  ArrowLeftOnRectangleIcon
+  ArrowLeftOnRectangleIcon,
+  CodeBracketIcon,
+  AcademicCapIcon,
+  TrophyIcon
 } from '@heroicons/react/24/outline';
 
 export default function AdminDashboard() {
@@ -70,6 +73,27 @@ export default function AdminDashboard() {
       icon: PhotoIcon,
       href: '/admin/gallery',
       color: 'bg-amber-500',
+    },
+    {
+      title: 'Featured Projects',
+      description: 'Manage featured projects on the homepage',
+      icon: CodeBracketIcon,
+      href: '/admin/projects',
+      color: 'bg-indigo-500',
+    },
+    {
+      title: 'Workshops',
+      description: 'Manage workshop content and materials',
+      icon: AcademicCapIcon,
+      href: '/admin/workshops',
+      color: 'bg-emerald-500',
+    },
+    {
+      title: 'Coding Challenges',
+      description: 'Manage coding challenges and competitions',
+      icon: TrophyIcon,
+      href: '/admin/challenges',
+      color: 'bg-orange-500',
     },
   ];
 

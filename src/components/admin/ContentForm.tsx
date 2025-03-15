@@ -2,12 +2,18 @@
 
 import { useState } from 'react';
 
+interface SelectOption {
+  value: string;
+  label: string;
+}
+
 interface Field {
   name: string;
   label: string;
-  type: 'text' | 'textarea' | 'number' | 'url';
+  type: 'text' | 'textarea' | 'number' | 'url' | 'checkbox' | 'select';
   placeholder?: string;
   required?: boolean;
+  options?: SelectOption[];
 }
 
 interface ContentFormProps {
@@ -45,7 +51,7 @@ export default function ContentForm({
     }
   };
 
-  const handleChange = (name: string, value: string | number) => {
+  const handleChange = (name: string, value: string | number | boolean) => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
@@ -71,6 +77,30 @@ export default function ContentForm({
                 onChange={(e) => handleChange(field.name, e.target.value)}
                 required={field.required}
               />
+            ) : field.type === 'checkbox' ? (
+              <input
+                type="checkbox"
+                id={field.name}
+                name={field.name}
+                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded dark:bg-gray-800 dark:border-gray-600"
+                checked={!!formData[field.name]}
+                onChange={(e) => handleChange(field.name, e.target.checked)}
+              />
+            ) : field.type === 'select' && field.options ? (
+              <select
+                id={field.name}
+                name={field.name}
+                className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+                value={formData[field.name] || ''}
+                onChange={(e) => handleChange(field.name, e.target.value)}
+                required={field.required}
+              >
+                {field.options.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
             ) : (
               <input
                 type={field.type}

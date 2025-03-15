@@ -68,6 +68,46 @@ CREATE TABLE gallery_images (
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
 );
 
+-- Create featured_projects table
+CREATE TABLE featured_projects (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  title TEXT NOT NULL,
+  description TEXT NOT NULL,
+  image_url TEXT NOT NULL,
+  project_url TEXT NOT NULL,
+  github_url TEXT,
+  tags TEXT[] NOT NULL,
+  order_position INTEGER NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
+);
+
+-- Create workshops table
+CREATE TABLE workshops (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  title TEXT NOT NULL,
+  description TEXT NOT NULL,
+  date DATE NOT NULL,
+  materials JSONB NOT NULL,
+  order_position INTEGER NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
+);
+
+-- Create coding_challenges table
+CREATE TABLE coding_challenges (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  title TEXT NOT NULL,
+  description TEXT NOT NULL,
+  platform TEXT NOT NULL,
+  difficulty TEXT NOT NULL,
+  url TEXT NOT NULL,
+  due_date DATE,
+  is_active BOOLEAN NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
+);
+
 -- Create RLS policies
 ALTER TABLE admins ENABLE ROW LEVEL SECURITY;
 ALTER TABLE hero_content ENABLE ROW LEVEL SECURITY;
@@ -75,6 +115,9 @@ ALTER TABLE about_section ENABLE ROW LEVEL SECURITY;
 ALTER TABLE social_links ENABLE ROW LEVEL SECURITY;
 ALTER TABLE executives ENABLE ROW LEVEL SECURITY;
 ALTER TABLE gallery_images ENABLE ROW LEVEL SECURITY;
+ALTER TABLE featured_projects ENABLE ROW LEVEL SECURITY;
+ALTER TABLE workshops ENABLE ROW LEVEL SECURITY;
+ALTER TABLE coding_challenges ENABLE ROW LEVEL SECURITY;
 
 -- Admins table policies
 CREATE POLICY "Allow public read access to admins" ON admins
@@ -122,6 +165,27 @@ CREATE POLICY "Allow admin all access to gallery_images" ON gallery_images
   USING (auth.uid() IN (SELECT user_id FROM admins))
   WITH CHECK (auth.uid() IN (SELECT user_id FROM admins));
 
+CREATE POLICY "Allow public read access to featured_projects" ON featured_projects
+  FOR SELECT USING (true);
+
+CREATE POLICY "Allow admin all access to featured_projects" ON featured_projects
+  USING (auth.uid() IN (SELECT user_id FROM admins))
+  WITH CHECK (auth.uid() IN (SELECT user_id FROM admins));
+
+CREATE POLICY "Allow public read access to workshops" ON workshops
+  FOR SELECT USING (true);
+
+CREATE POLICY "Allow admin all access to workshops" ON workshops
+  USING (auth.uid() IN (SELECT user_id FROM admins))
+  WITH CHECK (auth.uid() IN (SELECT user_id FROM admins));
+
+CREATE POLICY "Allow public read access to coding_challenges" ON coding_challenges
+  FOR SELECT USING (true);
+
+CREATE POLICY "Allow admin all access to coding_challenges" ON coding_challenges
+  USING (auth.uid() IN (SELECT user_id FROM admins))
+  WITH CHECK (auth.uid() IN (SELECT user_id FROM admins));
+
 -- Create function to update updated_at timestamp
 CREATE OR REPLACE FUNCTION update_updated_at_column()
 RETURNS TRIGGER AS $$
@@ -154,6 +218,21 @@ CREATE TRIGGER update_executives_updated_at
 
 CREATE TRIGGER update_gallery_images_updated_at
   BEFORE UPDATE ON gallery_images
+  FOR EACH ROW
+  EXECUTE FUNCTION update_updated_at_column();
+
+CREATE TRIGGER update_featured_projects_updated_at
+  BEFORE UPDATE ON featured_projects
+  FOR EACH ROW
+  EXECUTE FUNCTION update_updated_at_column();
+
+CREATE TRIGGER update_workshops_updated_at
+  BEFORE UPDATE ON workshops
+  FOR EACH ROW
+  EXECUTE FUNCTION update_updated_at_column();
+
+CREATE TRIGGER update_coding_challenges_updated_at
+  BEFORE UPDATE ON coding_challenges
   FOR EACH ROW
   EXECUTE FUNCTION update_updated_at_column();
 
@@ -229,3 +308,110 @@ INSERT INTO executives (
   ('Raymon Drost', 12, 'Co-President', 2),
   ('Jeevithan Muhunthan', 10, 'Co-President', 3),
   ('Kevin Chang', 10, 'Co-President', 4); 
+
+INSERT INTO gallery_images (
+  title,
+  description,
+  image_url,
+  event_type,
+  date,
+  order_position
+) VALUES
+  (
+    'CHCI Coding Club',
+    'A community of passionate coders learning and building together',
+    'https://example.com/image.jpg',
+    'Workshop',
+    '2024-01-01',
+    1
+  ),
+  (
+    'CHCI Coding Club',
+    'A community of passionate coders learning and building together',
+    'https://example.com/image.jpg',
+    'Workshop',
+    '2024-01-01',
+    2
+  );
+
+INSERT INTO featured_projects (
+  title,
+  description,
+  image_url,
+  project_url,
+  github_url,
+  tags,
+  order_position
+) VALUES
+  (
+    'CHCI Coding Club', 
+    'A community of passionate coders learning and building together',
+    'https://example.com/image.jpg',
+    'https://example.com/project',
+    'https://example.com/github',
+    '{Python, JavaScript}',
+    1
+  ),
+  (
+    'CHCI Coding Club',
+    'A community of passionate coders learning and building together',
+    'https://example.com/image.jpg',
+    'https://example.com/project',
+    'https://example.com/github',
+    '{Python, JavaScript}',
+    2
+  );
+
+INSERT INTO workshops (
+  title,
+  description,
+  date,
+  materials,
+  order_position
+) VALUES
+  (
+    'CHCI Coding Club',
+    'A community of passionate coders learning and building together',
+    '2024-01-01',
+    '{Python, JavaScript}',
+    1
+  ),
+  (   
+    'CHCI Coding Club',
+    'A community of passionate coders learning and building together',
+    '2024-01-01',
+    '{Python, JavaScript}',
+    2
+  );
+
+INSERT INTO coding_challenges (
+  title,
+  description,
+  platform,
+  difficulty,
+  url,
+  due_date,
+  is_active,
+  order_position
+) VALUES
+  (
+    'CHCI Coding Club',
+    'A community of passionate coders learning and building together',
+    'DMOJ',
+    'Easy',
+    'https://example.com/challenge',
+    '2024-01-01',
+    true,
+    1
+  ),
+  (
+    'CHCI Coding Club',
+    'A community of passionate coders learning and building together',
+    'DMOJ',
+    'Easy',
+    'https://example.com/challenge',
+    '2024-01-01',
+    true,
+    2
+  );        
+

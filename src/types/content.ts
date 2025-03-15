@@ -3,7 +3,7 @@ export interface Executive {
   name: string;
   grade: number;
   role?: string;
-  order: number;
+  order_position: number;
   created_at: string;
   updated_at: string;
 }
@@ -15,7 +15,7 @@ export interface SocialLink {
   link: string;
   button_text: string;
   button_style: 'default' | 'instagram' | 'discord';
-  order: number;
+  order_position: number;
   created_at: string;
   updated_at: string;
 }
@@ -27,7 +27,7 @@ export interface GalleryImage {
   image_url: string;
   event_type: string;
   date: string;
-  order: number;
+  order_position: number;
   created_at: string;
   updated_at: string;
 }
@@ -55,10 +55,61 @@ export interface AboutSection {
   updated_at: string;
 }
 
+export interface FeaturedProject {
+  id: string;
+  title: string;
+  description: string;
+  image_url: string;
+  project_url: string;
+  github_url?: string;
+  tags: string[];
+  order_position: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Workshop {
+  id: string;
+  title: string;
+  description: string;
+  week_number: number;
+  date: string;
+  materials: WorkshopMaterial[];
+  created_at: string;
+  updated_at: string;
+}
+
+export interface WorkshopMaterial {
+  id: string;
+  workshop_id: string;
+  title: string;
+  type: 'slides' | 'code' | 'video' | 'document' | 'other';
+  url: string;
+  order_position: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface CodingChallenge {
+  id: string;
+  title: string;
+  description: string;
+  platform: 'dmoj' | 'leetcode' | 'hackerrank' | 'tournament' | 'hackathon' | 'competition' | 'other';
+  difficulty: 'easy' | 'medium' | 'hard' | 'na';
+  url: string;
+  due_date?: string;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
 // Combined type for all content sections
 export type ContentSection = 
   | { type: 'hero'; content: HeroContent }
   | { type: 'about'; content: AboutSection }
   | { type: 'social'; content: SocialLink[] }
   | { type: 'executives'; content: Executive[] }
-  | { type: 'gallery'; content: GalleryImage[] }; 
+  | { type: 'gallery'; content: GalleryImage[] }
+  | { type: 'projects'; content: FeaturedProject[] }
+  | { type: 'workshops'; content: Workshop[] }
+  | { type: 'challenges'; content: CodingChallenge[] }; 
