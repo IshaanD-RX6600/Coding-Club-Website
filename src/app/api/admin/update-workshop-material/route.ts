@@ -9,6 +9,8 @@ export async function PUT(request: Request) {
     console.log('Received request to create new workshop material');
     console.log('New material data:', JSON.stringify(newMaterial, null, 2));
 
+    if (newMaterial.order) delete newMaterial.order; // The field is supposed to be order_position not order
+
     if (!newMaterial.workshop_id) {
       return NextResponse.json({ error: 'Workshop ID is required' }, { status: 400 });
     }

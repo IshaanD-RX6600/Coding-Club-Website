@@ -136,7 +136,7 @@ export const weeks: Week[] = [
     number: 13,
     workshops: [
       {
-        title: "Dynamic Programming",
+        title: "CCC Overview",
         link: "https://docs.google.com/presentation/d/1ENdAr43sDuiaTIAD9ldETmMeqf1pWdHA0ovsLjV99X0/edit#slide=id.p",
         type: "presentation"
       }
@@ -146,7 +146,7 @@ export const weeks: Week[] = [
     number: 14,
     workshops: [
       {
-        title: "Graph Theory",
+        title: "Recursion",
         link: "https://docs.google.com/presentation/d/1W1ugq9rMZDygLA3h2dudjJSCCt213IvEcm7zb298wCY/edit#slide=id.p",
         type: "presentation"
       }
@@ -166,7 +166,7 @@ export const weeks: Week[] = [
     number: 16,
     workshops: [
       {
-        title: "Competitive Programming",
+        title: "Object-Oriented Programming",
         link: "https://docs.google.com/presentation/d/1jTgiFg8xHZaJWPNXMt635aay1lgFU9vaS_zzPtuKOzc/edit#slide=id.p",
         type: "presentation"
       }
@@ -176,7 +176,7 @@ export const weeks: Week[] = [
     number: 17,
     workshops: [
       {
-        title: "Web Development Basics",
+        title: "Pygame Introduction",
         link: "https://docs.google.com/presentation/d/1Spvq7fYFXlAwBJMTOJQwHI7Zn9apoTeSU2EQAlu7cQU/edit#slide=id.g754534f808_1_198",
         type: "presentation"
       }
@@ -186,7 +186,7 @@ export const weeks: Week[] = [
     number: 18,
     workshops: [
       {
-        title: "Frontend Development",
+        title: "Binary and Logical Operations",
         link: "https://docs.google.com/presentation/d/1E2d9VXqYHrcB964f7AfGx8yLDb3tI5dgOexdMrYsENk/edit#slide=id.p",
         type: "presentation"
       }
@@ -196,7 +196,7 @@ export const weeks: Week[] = [
     number: 19,
     workshops: [
       {
-        title: "Final Project Workshop",
+        title: "Intro to Deep Learning",
         link: "https://docs.google.com/presentation/d/1vaiM8JNKL7-rr4AOJPcL5zlC79FRqdnAEl1lON637us/edit#slide=id.p",
         type: "presentation"
       }
@@ -206,7 +206,7 @@ export const weeks: Week[] = [
     number: 20,
     workshops: [
       {
-        title: "Project Results",
+        title: "Continue Deep Learning",
         link: "https://drive.google.com/file/d/1-hc7JKZjjedjGljIDribEKp2uY0BKAZ0/view",
         type: "presentation"
       }
