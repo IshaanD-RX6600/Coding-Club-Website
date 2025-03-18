@@ -8,7 +8,10 @@ import {
   FeaturedProject,
   Workshop,
   WorkshopMaterial,
-  CodingChallenge
+  CodingChallenge,
+  Challenge,
+  Hackathon,
+  Competition
 } from '@/types/content';
 
 // Create a standard client for read operations
@@ -593,6 +596,204 @@ export const deleteCodingChallenge = async (id: string): Promise<void> => {
     }
   } catch (error) {
     console.error('Error deleting coding challenge:', error);
+    throw error;
+  }
+};
+
+// Challenges
+export const getChallenges = async (): Promise<Challenge[]> => {
+  const { data, error } = await supabase
+    .from('challenges')
+    .select('*')
+    .order('week_number', { ascending: true });
+  
+  if (error) handleError(error);
+  return data || [];
+};
+
+export const createChallenge = async (challenge: Omit<Challenge, 'id' | 'created_at' | 'updated_at'>): Promise<Challenge> => {
+  try {
+    const response = await fetch('/api/admin/update-challenge', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(challenge)
+    });
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Failed to create challenge: ${response.status} ${errorText}`);
+    }
+    
+    const result = await response.json();
+    if (!result.data) {
+      throw new Error('No data returned from API');
+    }
+    
+    return result.data;
+  } catch (error) {
+    console.error('Error creating challenge:', error);
+    throw error;
+  }
+};
+
+export const updateChallenge = async (challenge: Partial<Challenge>): Promise<Challenge> => {
+  try {
+    if (!challenge.id) {
+      throw new Error('Challenge ID is required');
+    }
+    return await adminApiUpdate<Challenge>('update-challenge', challenge);
+  } catch (error) {
+    console.error('Error updating challenge:', error);
+    throw error;
+  }
+};
+
+export const deleteChallenge = async (id: string): Promise<void> => {
+  try {
+    const response = await fetch(`/api/admin/update-challenge?id=${id}`, {
+      method: 'DELETE',
+    });
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Failed to delete challenge: ${response.status} ${errorText}`);
+    }
+  } catch (error) {
+    console.error('Error deleting challenge:', error);
+    throw error;
+  }
+};
+
+// Hackathons
+export const getHackathons = async (): Promise<Hackathon[]> => {
+  const { data, error } = await supabase
+    .from('hackathons')
+    .select('*')
+    .order('start_date', { ascending: true });
+  
+  if (error) handleError(error);
+  return data || [];
+};
+
+export const createHackathon = async (hackathon: Omit<Hackathon, 'id' | 'created_at' | 'updated_at'>): Promise<Hackathon> => {
+  try {
+    const response = await fetch('/api/admin/update-hackathon', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(hackathon)
+    });
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Failed to create hackathon: ${response.status} ${errorText}`);
+    }
+    
+    const result = await response.json();
+    if (!result.data) {
+      throw new Error('No data returned from API');
+    }
+    
+    return result.data;
+  } catch (error) {
+    console.error('Error creating hackathon:', error);
+    throw error;
+  }
+};
+
+export const updateHackathon = async (hackathon: Partial<Hackathon>): Promise<Hackathon> => {
+  try {
+    if (!hackathon.id) {
+      throw new Error('Hackathon ID is required');
+    }
+    return await adminApiUpdate<Hackathon>('update-hackathon', hackathon);
+  } catch (error) {
+    console.error('Error updating hackathon:', error);
+    throw error;
+  }
+};
+
+export const deleteHackathon = async (id: string): Promise<void> => {
+  try {
+    const response = await fetch(`/api/admin/update-hackathon?id=${id}`, {
+      method: 'DELETE',
+    });
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Failed to delete hackathon: ${response.status} ${errorText}`);
+    }
+  } catch (error) {
+    console.error('Error deleting hackathon:', error);
+    throw error;
+  }
+};
+
+// Competitions
+export const getCompetitions = async (): Promise<Competition[]> => {
+  const { data, error } = await supabase
+    .from('competitions')
+    .select('*')
+    .order('date', { ascending: true });
+  
+  if (error) handleError(error);
+  return data || [];
+};
+
+export const createCompetition = async (competition: Omit<Competition, 'id' | 'created_at' | 'updated_at'>): Promise<Competition> => {
+  try {
+    const response = await fetch('/api/admin/update-competition', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(competition)
+    });
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Failed to create competition: ${response.status} ${errorText}`);
+    }
+    
+    const result = await response.json();
+    if (!result.data) {
+      throw new Error('No data returned from API');
+    }
+    
+    return result.data;
+  } catch (error) {
+    console.error('Error creating competition:', error);
+    throw error;
+  }
+};
+
+export const updateCompetition = async (competition: Partial<Competition>): Promise<Competition> => {
+  try {
+    if (!competition.id) {
+      throw new Error('Competition ID is required');
+    }
+    return await adminApiUpdate<Competition>('update-competition', competition);
+  } catch (error) {
+    console.error('Error updating competition:', error);
+    throw error;
+  }
+};
+
+export const deleteCompetition = async (id: string): Promise<void> => {
+  try {
+    const response = await fetch(`/api/admin/update-competition?id=${id}`, {
+      method: 'DELETE',
+    });
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Failed to delete competition: ${response.status} ${errorText}`);
+    }
+  } catch (error) {
+    console.error('Error deleting competition:', error);
     throw error;
   }
 }; 

@@ -103,6 +103,51 @@ export interface CodingChallenge {
   updated_at: string;
 }
 
+export type ChallengePlatform = 'dmoj' | 'leetcode' | 'hackerrank' | 'tournament' | 'hackathon' | 'competition' | 'other';
+export type ChallengeDifficulty = 'beginner' | 'medium' | 'advanced' | 'na';
+
+export interface Challenge {
+  id: string;
+  title: string;
+  description?: string;
+  platform: ChallengePlatform;
+  difficulty: ChallengeDifficulty;
+  url?: string;
+  week_number?: number;
+  is_active: boolean;
+  start_date?: string;
+  end_date?: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Hackathon {
+  id: string;
+  title: string;
+  description?: string;
+  location: string;
+  start_date: string;
+  end_date: string;
+  url?: string;
+  image_url?: string;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Competition {
+  id: string;
+  title: string;
+  description?: string;
+  platform: string;
+  date: string;
+  registration_deadline?: string;
+  url?: string;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
 // Combined type for all content sections
 export type ContentSection = 
   | { type: 'hero'; content: HeroContent }
