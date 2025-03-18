@@ -7,7 +7,7 @@ import {
   getHackathons, createHackathon, updateHackathon, deleteHackathon,
   getCompetitions, createCompetition, updateCompetition, deleteCompetition
 } from '@/lib/content';
-import { PlusIcon, PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { PlusIcon, PencilIcon, TrashIcon, MagnifyingGlassIcon, FunnelIcon } from '@heroicons/react/24/outline';
 import ContentForm from '@/components/admin/ContentForm';
 import { Spinner } from '@/components/Spinner';
 import { Tab } from '@headlessui/react';
@@ -31,6 +31,13 @@ export default function ChallengesAdmin() {
   const [loading, setLoading] = useState(true);
   const [editingItem, setEditingItem] = useState<ContentItem | null>(null);
   const [creatingItem, setCreatingItem] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filters, setFilters] = useState({
+    platform: '',
+    difficulty: '',
+    isActive: ''
+  });
+  const [showFilters, setShowFilters] = useState(false);
 
   const loadContent = async () => {
     try {
@@ -136,6 +143,19 @@ export default function ChallengesAdmin() {
     }
   };
 
+  const filteredChallenges = challenges.filter(challenge => {
+    const matchesSearch = challenge.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         (challenge.description?.toLowerCase() || '').includes(searchQuery.toLowerCase());
+    
+    const matchesPlatform = !filters.platform || challenge.platform === filters.platform;
+    const matchesDifficulty = !filters.difficulty || challenge.difficulty === filters.difficulty;
+    const matchesActive = filters.isActive === '' || 
+                         (filters.isActive === 'true' && challenge.is_active) ||
+                         (filters.isActive === 'false' && !challenge.is_active);
+    
+    return matchesSearch && matchesPlatform && matchesDifficulty && matchesActive;
+  });
+
   const challengeFields: Field[] = [
     { name: 'title', label: 'Title', type: 'text', required: true },
     { name: 'description', label: 'Description', type: 'textarea', required: true },
@@ -220,13 +240,13 @@ export default function ChallengesAdmin() {
         const challenge = item as Challenge;
         return (
           <div className="flex items-center mt-1 space-x-2">
-            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
               {challenge.platform.charAt(0).toUpperCase() + challenge.platform.slice(1)}
             </span>
-            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200">
               {challenge.difficulty.charAt(0).toUpperCase() + challenge.difficulty.slice(1)}
             </span>
-            <span className="text-gray-600 text-sm">
+            <span className="text-gray-600 dark:text-gray-300 text-sm">
               Week {challenge.week_number}
             </span>
           </div>
@@ -235,10 +255,10 @@ export default function ChallengesAdmin() {
         const hackathon = item as Hackathon;
         return (
           <div className="flex items-center mt-1 space-x-2">
-            <span className="text-gray-600 text-sm">
+            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
               {hackathon.start_date && new Date(hackathon.start_date).toLocaleDateString()} - {hackathon.end_date && new Date(hackathon.end_date).toLocaleDateString()}
             </span>
-            <span className="text-gray-600 text-sm">
+            <span className="text-gray-600 dark:text-gray-300 text-sm">
               {hackathon.location}
             </span>
           </div>
@@ -247,10 +267,10 @@ export default function ChallengesAdmin() {
         const competition = item as Competition;
         return (
           <div className="flex items-center mt-1 space-x-2">
-            <span className="text-gray-600 text-sm">
+            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
               Date: {competition.date && new Date(competition.date).toLocaleDateString()}
             </span>
-            <span className="text-gray-600 text-sm">
+            <span className="text-gray-600 dark:text-gray-300 text-sm">
               Registration Deadline: {competition.registration_deadline && new Date(competition.registration_deadline).toLocaleDateString()}
             </span>
           </div>
@@ -269,7 +289,7 @@ export default function ChallengesAdmin() {
   return (
     <div className="space-y-8">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Challenges Management</h1>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Challenges Management</h1>
         <button
           onClick={() => setCreatingItem(true)}
           className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md flex items-center"
@@ -287,7 +307,7 @@ export default function ChallengesAdmin() {
               className={({ selected }) =>
                 `w-full rounded-lg py-2.5 text-sm font-medium leading-5
                  ${selected
-                  ? 'bg-white text-blue-700 shadow'
+                  ? 'bg-white dark:bg-gray-800 text-blue-700 dark:text-blue-400 shadow'
                   : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
                 }`
               }
@@ -298,13 +318,137 @@ export default function ChallengesAdmin() {
         </Tab.List>
       </Tab.Group>
 
+      {/* Search and Filters */}
+      {selectedTab === 'challenges' && (
+        <div className="space-y-4">
+          <div className="flex items-center space-x-4">
+            <div className="flex-1 relative">
+              <MagnifyingGlassIcon className="h-5 w-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500" />
+              <input
+                type="text"
+                placeholder="Search challenges..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+            <button
+              onClick={() => setShowFilters(!showFilters)}
+              className="flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+            >
+              <FunnelIcon className="h-5 w-5 mr-2" />
+              Filters
+            </button>
+          </div>
+
+          {showFilters && (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Platform
+                </label>
+                <select
+                  value={filters.platform}
+                  onChange={(e) => setFilters({ ...filters, platform: e.target.value })}
+                  className="w-full border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  <option value="">All Platforms</option>
+                  <option value="dmoj">DMOJ</option>
+                  <option value="leetcode">LeetCode</option>
+                  <option value="hackerrank">HackerRank</option>
+                  <option value="tournament">Tournament</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Difficulty
+                </label>
+                <select
+                  value={filters.difficulty}
+                  onChange={(e) => setFilters({ ...filters, difficulty: e.target.value })}
+                  className="w-full border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  <option value="">All Difficulties</option>
+                  <option value="beginner">Beginner</option>
+                  <option value="medium">Medium</option>
+                  <option value="advanced">Advanced</option>
+                  <option value="na">N/A</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Status
+                </label>
+                <select
+                  value={filters.isActive}
+                  onChange={(e) => setFilters({ ...filters, isActive: e.target.value })}
+                  className="w-full border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  <option value="">All Status</option>
+                  <option value="true">Active</option>
+                  <option value="false">Inactive</option>
+                </select>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
       {/* List of items */}
       <div className="space-y-6">
-        {getItems()?.length === 0 ? (
-          <p className="text-gray-500 text-center py-8">No {selectedTab} found. Create your first one!</p>
+        {selectedTab === 'challenges' ? (
+          filteredChallenges.length === 0 ? (
+            <p className="text-gray-500 dark:text-gray-400 text-center py-8">No challenges found matching your criteria.</p>
+          ) : (
+            filteredChallenges.map((item) => (
+              <div key={item.id} className="border border-gray-200 dark:border-gray-700 rounded-lg p-6 shadow-sm bg-white dark:bg-gray-800">
+                <div className="flex justify-between items-start mb-4">
+                  <div>
+                    <div className="flex items-center">
+                      <h2 className="text-xl font-semibold text-gray-900 dark:text-white">{item.title}</h2>
+                      {item.is_active && (
+                        <span className="ml-2 px-2 py-1 text-xs font-medium bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-full">
+                          Active
+                        </span>
+                      )}
+                    </div>
+                    {renderItemDetails(item)}
+                  </div>
+                  <div className="flex space-x-2">
+                    <button
+                      onClick={() => setEditingItem(item)}
+                      className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 p-2"
+                      title={`Edit ${selectedTab.slice(0, -1)}`}
+                    >
+                      <PencilIcon className="h-5 w-5" />
+                    </button>
+                    <button
+                      onClick={() => handleDelete(item.id)}
+                      className="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 p-2"
+                      title={`Delete ${selectedTab.slice(0, -1)}`}
+                    >
+                      <TrashIcon className="h-5 w-5" />
+                    </button>
+                  </div>
+                </div>
+
+                <p className="text-gray-700 dark:text-gray-300 mb-4">{item.description}</p>
+                
+                <a 
+                  href={item.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-blue-600 hover:underline dark:text-blue-400 dark:hover:text-blue-300 text-sm"
+                >
+                  View {selectedTab.slice(0, -1)}
+                </a>
+              </div>
+            ))
+          )
         ) : (
           getItems()?.map((item) => (
-            <div key={item.id} className="border border-gray-200 rounded-lg p-6 shadow-sm">
+            <div key={item.id} className="border border-gray-200 dark:border-gray-700 rounded-lg p-6 shadow-sm bg-white dark:bg-gray-800">
               <div className="flex justify-between items-start mb-4">
                 <div>
                   <div className="flex items-center">
@@ -335,7 +479,7 @@ export default function ChallengesAdmin() {
                 </div>
               </div>
 
-              <p className="text-gray-700 mb-4">{item.description}</p>
+              <p className="text-gray-700 dark:text-gray-300 mb-4">{item.description}</p>
               
               <a 
                 href={item.url} 
@@ -355,12 +499,12 @@ export default function ChallengesAdmin() {
         <div className="fixed inset-0 z-10 overflow-y-auto">
           <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
             <div className="fixed inset-0 transition-opacity" aria-hidden="true">
-              <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+              <div className="absolute inset-0 bg-gray-500 dark:bg-gray-900 opacity-75"></div>
             </div>
             <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <h3 className="text-lg font-medium text-gray-900 mb-4">
+            <div className="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+              <div className="bg-white dark:bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
                   Edit {selectedTab.slice(0, -1)}
                 </h3>
                 <ContentForm
@@ -373,7 +517,7 @@ export default function ChallengesAdmin() {
                   <button
                     type="button"
                     onClick={() => setEditingItem(null)}
-                    className="bg-white text-gray-700 px-4 py-2 border border-gray-300 rounded-md shadow-sm hover:bg-gray-50"
+                    className="bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm hover:bg-gray-50 dark:hover:bg-gray-600"
                   >
                     Cancel
                   </button>
@@ -389,12 +533,12 @@ export default function ChallengesAdmin() {
         <div className="fixed inset-0 z-10 overflow-y-auto">
           <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
             <div className="fixed inset-0 transition-opacity" aria-hidden="true">
-              <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+              <div className="absolute inset-0 bg-gray-500 dark:bg-gray-900 opacity-75"></div>
             </div>
             <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <h3 className="text-lg font-medium text-gray-900 mb-4">
+            <div className="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+              <div className="bg-white dark:bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
                   Create New {selectedTab.slice(0, -1)}
                 </h3>
                 <ContentForm
@@ -428,7 +572,7 @@ export default function ChallengesAdmin() {
                   <button
                     type="button"
                     onClick={() => setCreatingItem(false)}
-                    className="bg-white text-gray-700 px-4 py-2 border border-gray-300 rounded-md shadow-sm hover:bg-gray-50"
+                    className="bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm hover:bg-gray-50 dark:hover:bg-gray-600"
                   >
                     Cancel
                   </button>

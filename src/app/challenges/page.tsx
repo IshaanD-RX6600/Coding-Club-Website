@@ -308,7 +308,7 @@ export default function ChallengesPage() {
                 
                   <div className={`overflow-hidden transition-all duration-300 ${expandedCategory === 'hr-hard' ? 'max-h-[500px] animate-slide-down' : 'max-h-0 animate-slide-up'}`}>
                     <div className="px-4 py-3 space-y-3 border-t border-gray-200 dark:border-gray-700">
-                      {hackerrankProblems.hard?.map((problem, index) => (
+                      {hackerrankProblems.advanced?.map((problem, index) => (
                         <div key={index} className="flex items-center justify-between bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600 transform transition-all duration-300 hover:scale-[1.02]">
                           <div className="flex-1">
                             <h4 className="font-medium text-gray-900 dark:text-white">Problem {index + 1}: {problem.title}</h4>
