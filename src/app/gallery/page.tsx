@@ -1,22 +1,49 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { GalleryGrid } from '@/components/GalleryGrid';
-import { galleryImages } from '@/data/gallery';
 import { PhotoIcon } from '@heroicons/react/24/outline';
+import { getGalleryImages } from '@/lib/content';
+import { GalleryImage } from '@/types/content';
+import { Spinner } from '@/components/Spinner';
 
 type EventFilter = string | 'all';
 
 export default function GalleryPage() {
   const [filter, setFilter] = useState<EventFilter>('all');
+  const [images, setImages] = useState<GalleryImage[]>([]);
+  const [loading, setLoading] = useState(true);
+  
+  useEffect(() => {
+    const loadImages = async () => {
+      try {
+        const data = await getGalleryImages();
+        setImages(data);
+      } catch (error) {
+        console.error('Error loading gallery images:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadImages();
+  }, []);
   
   // Extract unique event types for filtering
-  const eventTypes = ['all', ...Array.from(new Set(galleryImages.map(img => img.event || 'Other')))];
+  const eventTypes = ['all', ...Array.from(new Set(images.map(img => img.event_type || 'Other')))];
   
   // Filter images based on selected event type
   const filteredImages = filter === 'all'
-    ? galleryImages
-    : galleryImages.filter(img => (img.event || 'Other') === filter);
+    ? images
+    : images.filter(img => (img.event_type || 'Other') === filter);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[60vh]">
+        <Spinner size="lg" />
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
